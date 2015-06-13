@@ -1,0 +1,76 @@
+﻿@model IEnumerable<AETTI.Models.Proyecto>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Crear", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.NroProyecto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TituloProyecto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Diagnostico)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Producto)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Resumen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Actividades)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LinkYoutube)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TipoProyecto.Codigo)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NroProyecto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TituloProyecto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Diagnostico)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Resumen)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Actividades)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LinkYoutube)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TipoProyecto.Codigo)
+            </td>
+            <td>
+                @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

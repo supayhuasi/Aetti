@@ -1,0 +1,82 @@
+﻿@model AETTI.Models.Proyecto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Proyecto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NroProyecto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NroProyecto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TituloProyecto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TituloProyecto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diagnostico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diagnostico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Producto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Producto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Resumen)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Resumen)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Actividades)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Actividades)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LinkYoutube)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LinkYoutube)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoProyecto.Codigo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoProyecto.Codigo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
