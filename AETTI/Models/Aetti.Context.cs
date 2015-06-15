@@ -27,6 +27,5 @@ namespace AETTI.Models
     
         public virtual DbSet<Persona> Persona { get; set; }
         public virtual DbSet<Proyecto> Proyecto { get; set; }
-        public virtual DbSet<TipoProyecto> TipoProyecto { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace AETTI.Controllers
         // GET: Proyectoes
         public ActionResult Index()
         {
-            var proyecto = db.Proyecto.Include(p => p.TipoProyecto);
+            var proyecto = db.Proyecto.Include(p => p.Persona);
             return View(proyecto.ToList());
         }
         //public ActionResult Index(string apellido)
@@ -42,10 +42,10 @@ namespace AETTI.Controllers
         }
 
         // GET: Proyectoes/Create
-        public ActionResult Create()
+        public ActionResult Create(int? Id)
         {
-            ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion");
-            ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial");
+            //ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion");
+            ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial",Id);
             return View();
         }
 
@@ -54,7 +54,7 @@ namespace AETTI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "NroProyecto,TituloProyecto,IdTipoProyecto,Diagnostico,Producto,Resumen,Actividades,LinkYoutube,IdPersona")] Proyecto proyecto)
+        public ActionResult Create(Proyecto proyecto)
         {
             if (ModelState.IsValid)
             {
@@ -69,7 +69,7 @@ namespace AETTI.Controllers
                 }
             }
 
-            ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
+            //ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
             ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial", proyecto.IdPersona);
             return View(proyecto);
         }
@@ -86,7 +86,7 @@ namespace AETTI.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
+          //  ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
             ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial", proyecto.IdPersona);
             return View(proyecto);
         }
@@ -96,7 +96,7 @@ namespace AETTI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "NroProyecto,TituloProyecto,IdTipoProyecto,Diagnostico,Producto,Resumen,Actividades,LinkYoutube,IdPersona")] Proyecto proyecto)
+        public ActionResult Edit([Bind(Include = "NroProyecto,TituloProyecto,TipoProyecto,Diagnostico,Producto,Resumen,Actividades,LinkYoutube,IdPersona")] Proyecto proyecto)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +104,7 @@ namespace AETTI.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
+         //   ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
             ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial", proyecto.IdPersona);
             return View(proyecto);
         }

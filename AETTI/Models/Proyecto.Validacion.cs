@@ -23,11 +23,7 @@ namespace AETTI.Models
         [DisplayName("Título del Proyecto")]
         [Required(ErrorMessage = "Este campo es obligatorio.")]
         public string TituloProyecto { get; set; }
-
-        [DisplayName("Tipo de Proyecto")]
-        //[Required(ErrorMessage = "Este campo es obligatorio.")]
-        public int? IdTipoProyecto { get; set; }
-
+        
         [DisplayName("Emprendedor")]
         //[Required(ErrorMessage = "Este campo es obligatorio.")]
         public int? IdPersona { get; set; }

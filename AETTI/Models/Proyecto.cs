@@ -17,7 +17,7 @@ namespace AETTI.Models
         public int Id { get; set; }
         public Nullable<int> NroProyecto { get; set; }
         public string TituloProyecto { get; set; }
-        public Nullable<int> IdTipoProyecto { get; set; }
+        public string TipoProyecto { get; set; }
         public string Diagnostico { get; set; }
         public string Producto { get; set; }
         public string Resumen { get; set; }
@@ -26,6 +26,5 @@ namespace AETTI.Models
         public Nullable<int> IdPersona { get; set; }
     
         public virtual Persona Persona { get; set; }
-        public virtual TipoProyecto TipoProyecto { get; set; }
     }
 }

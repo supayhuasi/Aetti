@@ -22,7 +22,7 @@ namespace AETTI.Controllers
         [HttpPost]
         public ActionResult Index(BusquedaViewModel busqueda)
         {
-            var proyecto = db.Proyecto.Include(p => p.TipoProyecto).Include(p=>p.Persona).          
+            var proyecto = db.Proyecto.Include(p=>p.Persona).          
             Where(x => x.NroProyecto == busqueda.NroProyecto || x.Persona.RazonSocial == busqueda.RazonSocial);
             return View("Busqueda",proyecto.ToList());
             
@@ -44,7 +44,7 @@ namespace AETTI.Controllers
         // GET: Proyectoes/Create
         public ActionResult Create()
         {
-            ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion");
+           // ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion");
             ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial");
             return View();
         }
@@ -70,7 +70,7 @@ namespace AETTI.Controllers
                 }
             }
 
-            ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
+            //ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
             ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial", proyecto.IdPersona);
             return View(proyecto);
         }
@@ -87,7 +87,7 @@ namespace AETTI.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
+            //ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
             ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial", proyecto.IdPersona);
             return View(proyecto);
         }
@@ -105,7 +105,7 @@ namespace AETTI.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
+          //  ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
             ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial", proyecto.IdPersona);
             return View(proyecto);
         }

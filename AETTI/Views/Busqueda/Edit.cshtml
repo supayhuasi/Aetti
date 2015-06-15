@@ -34,10 +34,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.IdTipoProyecto, "IdTipoProyecto", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TipoProyecto, "TipoProyecto", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("IdTipoProyecto", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.IdTipoProyecto, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.TipoProyecto, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.TipoProyecto, "", new { @class = "text-danger" })
             </div>
         </div>
 

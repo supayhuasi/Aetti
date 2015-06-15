@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Persona">
           <Key>
             <PropertyRef Name="Id" />
@@ -26,21 +26,13 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NroProyecto" Type="int" />
           <Property Name="TituloProyecto" Type="varchar" MaxLength="100" />
-          <Property Name="IdTipoProyecto" Type="int" />
+          <Property Name="TipoProyecto" Type="varchar" MaxLength="100" />
           <Property Name="Diagnostico" Type="varchar" MaxLength="100" />
           <Property Name="Producto" Type="varchar" MaxLength="100" />
           <Property Name="Resumen" Type="varchar" MaxLength="100" />
           <Property Name="Actividades" Type="varchar" MaxLength="100" />
           <Property Name="LinkYoutube" Type="varchar" MaxLength="50" />
           <Property Name="IdPersona" Type="int" />
-        </EntityType>
-        <EntityType Name="TipoProyecto">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Codigo" Type="varchar" MaxLength="100" />
-          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_Proyecto_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
@@ -54,33 +46,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proyecto_TipoProyecto">
-          <End Role="TipoProyecto" Type="Self.TipoProyecto" Multiplicity="0..1" />
-          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoProyecto">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Proyecto">
-              <PropertyRef Name="IdTipoProyecto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="TestModelStoreContainer">
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proyecto" EntityType="Self.Proyecto" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="TipoProyecto" EntityType="Self.TipoProyecto" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Proyecto_Persona" Association="Self.FK_Proyecto_Persona">
             <End Role="Persona" EntitySet="Persona" />
             <End Role="Proyecto" EntitySet="Proyecto" />
           </AssociationSet>
-          <AssociationSet Name="FK_Proyecto_TipoProyecto" Association="Self.FK_Proyecto_TipoProyecto">
-            <End Role="TipoProyecto" EntitySet="TipoProyecto" />
-            <End Role="Proyecto" EntitySet="Proyecto" />
-          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -106,7 +80,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NroProyecto" Type="Int32" />
           <Property Name="TituloProyecto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="IdTipoProyecto" Type="Int32" />
+          <Property Name="TipoProyecto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Diagnostico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Producto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Resumen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
@@ -114,16 +88,6 @@
           <Property Name="LinkYoutube" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdPersona" Type="Int32" />
           <NavigationProperty Name="Persona" Relationship="Self.FK_Proyecto_Persona" FromRole="Proyecto" ToRole="Persona" />
-          <NavigationProperty Name="TipoProyecto" Relationship="Self.FK_Proyecto_TipoProyecto" FromRole="Proyecto" ToRole="TipoProyecto" />
-        </EntityType>
-        <EntityType Name="TipoProyecto">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Codigo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Proyecto" Relationship="Self.FK_Proyecto_TipoProyecto" FromRole="TipoProyecto" ToRole="Proyecto" />
         </EntityType>
         <Association Name="FK_Proyecto_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
@@ -137,28 +101,11 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Proyecto_TipoProyecto">
-          <End Role="TipoProyecto" Type="Self.TipoProyecto" Multiplicity="0..1" />
-          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TipoProyecto">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Proyecto">
-              <PropertyRef Name="IdTipoProyecto" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="TestEntities1" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Persona" EntityType="Self.Persona" />
           <EntitySet Name="Proyecto" EntityType="Self.Proyecto" />
-          <EntitySet Name="TipoProyecto" EntityType="Self.TipoProyecto" />
           <AssociationSet Name="FK_Proyecto_Persona" Association="Self.FK_Proyecto_Persona">
             <End Role="Persona" EntitySet="Persona" />
-            <End Role="Proyecto" EntitySet="Proyecto" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Proyecto_TipoProyecto" Association="Self.FK_Proyecto_TipoProyecto">
-            <End Role="TipoProyecto" EntitySet="TipoProyecto" />
             <End Role="Proyecto" EntitySet="Proyecto" />
           </AssociationSet>
         </EntityContainer>
@@ -189,22 +136,13 @@
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="NroProyecto" ColumnName="NroProyecto" />
                 <ScalarProperty Name="TituloProyecto" ColumnName="TituloProyecto" />
-                <ScalarProperty Name="IdTipoProyecto" ColumnName="IdTipoProyecto" />
+                <ScalarProperty Name="TipoProyecto" ColumnName="TipoProyecto" />
                 <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
                 <ScalarProperty Name="Producto" ColumnName="Producto" />
                 <ScalarProperty Name="Resumen" ColumnName="Resumen" />
                 <ScalarProperty Name="Actividades" ColumnName="Actividades" />
                 <ScalarProperty Name="LinkYoutube" ColumnName="LinkYoutube" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="TipoProyecto">
-            <EntityTypeMapping TypeName="TestModel.TipoProyecto">
-              <MappingFragment StoreEntitySet="TipoProyecto">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
-                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

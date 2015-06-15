@@ -52,7 +52,7 @@ namespace AETTI.Controllers
             {
                 db.Persona.Add(persona);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create", "Proyectoes", new { Id = persona.Id });
             }
 
             return View(persona);
