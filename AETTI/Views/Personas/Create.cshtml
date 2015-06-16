@@ -1,19 +1,18 @@
 ﻿@model AETTI.Models.Persona
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Agregar un titular";
 }
 
-<h2>Create</h2>
-
+<h2>Dar de alta un titular</h2>
+<hr />
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>Persona</h4>
-        <hr />
+    <div class="form-horizontal">        
+        
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
         <div class="form-group">
@@ -89,7 +88,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver", "Index","Home")
 </div>
 
 @section Scripts {

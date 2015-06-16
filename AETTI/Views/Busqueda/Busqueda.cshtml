@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<AETTI.Models.Proyecto>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Proyecto";
 }
 
 <h2>Index</h2>
 
-<p>
+@*<p>
     @Html.ActionLink("Crear", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
         <th>
@@ -59,11 +59,11 @@
             <td>
                 @Html.DisplayFor(modelItem => item.LinkYoutube)
             </td>            
-            <td>
+            @*<td>
                 @Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Detalles", "Details", new { id = item.Id }) |
                 @Html.ActionLink("Borrar", "Delete", new { id = item.Id })
-            </td>
+            </td>*@
         </tr>
     }
 

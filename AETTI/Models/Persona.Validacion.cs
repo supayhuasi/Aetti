@@ -21,7 +21,7 @@ namespace AETTI.Models
         [Required(ErrorMessage = "Este campo es obligatorio.")]
         public string CUIT { get; set; }
         
-        [DisplayName("Razón Social / Apellido y nombre")]
+        [DisplayName("Titular")]
         [StringLength(100)]
         [Required(ErrorMessage = "Este campo es obligatorio.")]
         public string RazonSocial { get; set; }
