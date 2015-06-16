@@ -45,8 +45,10 @@ namespace AETTI.Controllers
         public ActionResult Create(int? Id)
         {
             //ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion");
-            ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial",Id);
-            return View();
+            //ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial",Id);
+            var proyecto = new Proyecto();
+            proyecto.IdPersona = Id;
+            return View(proyecto);
         }
 
         // POST: Proyectoes/Create
@@ -61,7 +63,7 @@ namespace AETTI.Controllers
                 try { 
                 db.Proyecto.Add(proyecto);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Index","Home");
                     }
                 catch(Exception ex)
                 {

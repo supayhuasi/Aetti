@@ -10,6 +10,7 @@ namespace AETTI.ViewModels
     {
         [DisplayName("Titular")]
         public string RazonSocial { get; set; }
+        [DisplayName("Nro Proyecto")]
         public int? NroProyecto { get; set; }
     }
 }

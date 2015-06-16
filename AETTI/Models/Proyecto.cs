@@ -24,7 +24,9 @@ namespace AETTI.Models
         public string Actividades { get; set; }
         public string LinkYoutube { get; set; }
         public Nullable<int> IdPersona { get; set; }
-    
+
+        public string Estado { get; set; }
+        
         public virtual Persona Persona { get; set; }
     }
 }

@@ -32,19 +32,19 @@ namespace AETTI.Models
         //[Required(ErrorMessage = "Este campo es obligatorio.")]
         public string Diagnostico { get; set; }
 
-        [DisplayName("Producto que desea fabricar o desarrollar")]
+        [DisplayName("Prod. que desea fabricar o desarrollar")]
         //[Required(ErrorMessage = "Este campo es obligatorio.")]
         public string Producto { get; set; }
 
-        [DisplayName("Resumen del proceso de producción y el mercado")]
+        [DisplayName("Proceso de producción y el mercado")]
         //[Required(ErrorMessage = "Este campo es obligatorio.")]
         public string Resumen { get; set; }
 
-        [DisplayName("Actividades que desea financiar y monto estimado de cada una")]
+        [DisplayName("Act. que desea financiar y monto estimado")]
         //[Required(ErrorMessage = "Este campo es obligatorio.")]
         public string Actividades { get; set; }
 
-        [DisplayName("Link de youtube del videopitch (Por favor no mas de 2 minutos contando su idea proyecto)")]   
+        [DisplayName("Link de youtube del videopitch")]   
         public string LinkYoutube { get; set; }
         
         
