@@ -13,20 +13,21 @@ namespace AETTI.Models
 
     public class ProyectoValidation
     {
-        
+
+        [DisplayName("Nro de Proyecto")]
         public int Id { get; set; }
 
-        [DisplayName("Nro. Proyecto")]
-        //[Range(0, 99999999999999.99, ErrorMessage = "Limite debe ser numerico")]
-        [Required(ErrorMessage = "Este campo es obligatorio.")]
-        public Nullable<int> NroProyecto { get; set; }
         [DisplayName("Título del Proyecto")]
         [Required(ErrorMessage = "Este campo es obligatorio.")]
         public string TituloProyecto { get; set; }
         
         [DisplayName("Emprendedor")]
-        //[Required(ErrorMessage = "Este campo es obligatorio.")]
+        [Required(ErrorMessage = "Este campo es obligatorio.")]
         public int? IdPersona { get; set; }
+
+
+        [DisplayName("Tipo de Proyecto")]
+        public Nullable<int> IdTipoProyecto { get; set; }
 
         [DisplayName("Diagnostico de donde observa la necesidad")]
         //[Required(ErrorMessage = "Este campo es obligatorio.")]
@@ -46,7 +47,7 @@ namespace AETTI.Models
 
         [DisplayName("Link de youtube del videopitch")]   
         public string LinkYoutube { get; set; }
-        
-        
+
+       
     }
 }

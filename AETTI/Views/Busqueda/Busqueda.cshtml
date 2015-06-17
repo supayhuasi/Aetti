@@ -3,8 +3,8 @@
 @{
     ViewBag.Title = "Proyecto";
 }
-
-<h2>Index</h2>
+<br>
+<h2>Resultado de la busqueda</h2>
 
 @*<p>
     @Html.ActionLink("Crear", "Create")
@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NroProyecto)
+            @Html.DisplayNameFor(model => model.Id)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.TituloProyecto)
@@ -42,7 +42,7 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NroProyecto)
+                @Html.DisplayFor(modelItem => item.Id)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.TituloProyecto)

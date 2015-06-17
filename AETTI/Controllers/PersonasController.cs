@@ -46,7 +46,7 @@ namespace AETTI.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,CUIT,RazonSocial,CodigoPostal,Provincia,PartidoDepartamento,Localidad,Telefono,Email")] Persona persona)
+        public ActionResult Create([Bind(Include = "Id,CUIT,RazonSocial,CodigoPostal,Profesion,Provincia,PartidoDepartamento,Localidad,Telefono,Email")] Persona persona)
         {
             if (ModelState.IsValid)
             {

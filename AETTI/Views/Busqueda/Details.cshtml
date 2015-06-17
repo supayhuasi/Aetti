@@ -3,72 +3,48 @@
 @{
     ViewBag.Title = "Details";
 }
-
-<h2>Details</h2>
+<br>
+<h2>Resultao de la busqueda</h2>
 
 <div>
-    <h4>Proyecto</h4>
-    <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.NroProyecto)
-        </dt>
+        <div class="form-group col-md-12">
+            @Html.LabelFor(model => model.TituloProyecto)
+            @Html.TextBoxFor(model => model.TituloProyecto, new { @class = "form-control", style = "max-width:100%", @readonly = "readonly" })
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.NroProyecto)
-        </dd>
+        <div class="form-group col-md-12">
+            @Html.LabelFor(model => model.IdTipoProyecto)
+            @Html.TextBoxFor(model => model.TipoProyecto1.Descripcion, new { @class = "form-control", style = "max-width:100%;", @readonly = "readonly" })
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.TituloProyecto)
-        </dt>
+        <div class="form-group col-md-12">
+            @Html.LabelFor(model => model.Diagnostico)
+            @Html.TextAreaFor(model => model.Diagnostico, new { cols = "120", rows = "4", @class = "form-control", style = "max-width:100%", @readonly = "readonly" })
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.TituloProyecto)
-        </dd>
+        <div class="form-group col-md-12">
+            @Html.LabelFor(model => model.Producto)
+            @Html.TextAreaFor(model => model.Producto, new { cols = "120", rows = "4", @class = "form-control", style = "max-width:100%", @readonly = "readonly" })
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Diagnostico)
-        </dt>
+        <div class="form-group col-md-12">
+            @Html.LabelFor(model => model.Resumen)
+            @Html.TextAreaFor(model => model.Resumen, new { cols = "120", rows = "4", @class = "form-control", style = "max-width:100%", @readonly = "readonly" })
+        </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Diagnostico)
-        </dd>
+        <div class="form-group col-md-12">
+            @Html.LabelFor(model => model.Actividades)
+            @Html.TextAreaFor(model => model.Actividades, new { cols = "120", rows = "4", @class = "form-control", style = "max-width:100%", @readonly = "readonly" })
+        </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Producto)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Producto)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Resumen)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Resumen)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Actividades)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Actividades)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LinkYoutube)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LinkYoutube)
-        </dd>        
+        <div class="form-group col-md-12">
+            @Html.LabelFor(model => model.LinkYoutube)
+            @Html.TextBoxFor(model => model.LinkYoutube, new { @class = "form-control", style = "max-width:100%", @readonly = "readonly" })            
+        </div>
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Volver", "Index", "Busqueda" ) 
 </p>

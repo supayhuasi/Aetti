@@ -22,10 +22,19 @@ namespace AETTI.Controllers
         [HttpPost]
         public ActionResult Index(BusquedaViewModel busqueda)
         {
+            if (busqueda.NroProyecto == null) busqueda.NroProyecto = -1;
+            if (busqueda.RazonSocial == null) busqueda.RazonSocial = "";
+ 
             var proyecto = db.Proyecto.Include(p=>p.Persona).          
-            Where(x => x.NroProyecto == busqueda.NroProyecto || x.Persona.RazonSocial == busqueda.RazonSocial);
-            return View("Busqueda",proyecto.ToList());
-            
+            Where(x => x.Id == busqueda.NroProyecto || x.Persona.RazonSocial == busqueda.RazonSocial);
+
+            if (proyecto.Count() > 0)
+                return View("Details", proyecto.First());
+            else
+            {
+                ViewBag.Message = "No se encontraron elementos";
+                return View(); }
+
         }
         public ActionResult Details(int? id)
         {

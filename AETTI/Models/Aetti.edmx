@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="TestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Persona">
           <Key>
             <PropertyRef Name="Id" />
@@ -18,6 +18,7 @@
           <Property Name="Localidad" Type="varchar" MaxLength="100" />
           <Property Name="Telefono" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="100" />
+          <Property Name="Profesion" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="Proyecto">
           <Key>
@@ -26,13 +27,23 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="NroProyecto" Type="int" />
           <Property Name="TituloProyecto" Type="varchar" MaxLength="100" />
-          <Property Name="TipoProyecto" Type="varchar" MaxLength="100" />
-          <Property Name="Diagnostico" Type="varchar" MaxLength="100" />
-          <Property Name="Producto" Type="varchar" MaxLength="100" />
-          <Property Name="Resumen" Type="varchar" MaxLength="100" />
-          <Property Name="Actividades" Type="varchar" MaxLength="100" />
+          <Property Name="IdTipoProyecto" Type="int" />
+          <Property Name="Diagnostico" Type="varchar(max)" />
+          <Property Name="Producto" Type="varchar(max)" />
+          <Property Name="Resumen" Type="varchar(max)" />
+          <Property Name="Actividades" Type="varchar(max)" />
           <Property Name="LinkYoutube" Type="varchar" MaxLength="50" />
           <Property Name="IdPersona" Type="int" />
+          <Property Name="TipoProyecto" Type="varchar" MaxLength="100" />
+          <Property Name="Estado" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="TipoProyecto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo" Type="varchar" MaxLength="100" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_Proyecto_Persona">
           <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
@@ -46,11 +57,28 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Proyecto_TipoProyecto">
+          <End Role="TipoProyecto" Type="Self.TipoProyecto" Multiplicity="0..1" />
+          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProyecto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proyecto">
+              <PropertyRef Name="IdTipoProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="TestModelStoreContainer">
           <EntitySet Name="Persona" EntityType="Self.Persona" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Proyecto" EntityType="Self.Proyecto" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoProyecto" EntityType="Self.TipoProyecto" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Proyecto_Persona" Association="Self.FK_Proyecto_Persona">
             <End Role="Persona" EntitySet="Persona" />
+            <End Role="Proyecto" EntitySet="Proyecto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Proyecto_TipoProyecto" Association="Self.FK_Proyecto_TipoProyecto">
+            <End Role="TipoProyecto" EntitySet="TipoProyecto" />
             <End Role="Proyecto" EntitySet="Proyecto" />
           </AssociationSet>
         </EntityContainer>
@@ -58,6 +86,19 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="TestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="TestEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Persona" EntityType="TestModel.Persona" />
+          <EntitySet Name="Proyecto" EntityType="TestModel.Proyecto" />
+          <AssociationSet Name="FK_Proyecto_Persona" Association="TestModel.FK_Proyecto_Persona">
+            <End Role="Persona" EntitySet="Persona" />
+            <End Role="Proyecto" EntitySet="Proyecto" />
+          </AssociationSet>
+          <EntitySet Name="TipoProyecto" EntityType="TestModel.TipoProyecto" />
+          <AssociationSet Name="FK_Proyecto_TipoProyecto" Association="TestModel.FK_Proyecto_TipoProyecto">
+            <End Role="TipoProyecto" EntitySet="TipoProyecto" />
+            <End Role="Proyecto" EntitySet="Proyecto" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="Persona">
           <Key>
             <PropertyRef Name="Id" />
@@ -71,7 +112,8 @@
           <Property Name="Localidad" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="Telefono" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Proyecto" Relationship="Self.FK_Proyecto_Persona" FromRole="Persona" ToRole="Proyecto" />
+          <Property Name="Profesion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Proyecto" Relationship="TestModel.FK_Proyecto_Persona" FromRole="Persona" ToRole="Proyecto" />
         </EntityType>
         <EntityType Name="Proyecto">
           <Key>
@@ -80,18 +122,21 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="NroProyecto" Type="Int32" />
           <Property Name="TituloProyecto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="TipoProyecto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Diagnostico" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Producto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Resumen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Actividades" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="IdTipoProyecto" Type="Int32" />
+          <Property Name="Diagnostico" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Producto" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Resumen" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Actividades" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
           <Property Name="LinkYoutube" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IdPersona" Type="Int32" />
-          <NavigationProperty Name="Persona" Relationship="Self.FK_Proyecto_Persona" FromRole="Proyecto" ToRole="Persona" />
+          <Property Name="TipoProyecto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Persona" Relationship="TestModel.FK_Proyecto_Persona" FromRole="Proyecto" ToRole="Persona" />
+          <NavigationProperty Name="TipoProyecto1" Relationship="TestModel.FK_Proyecto_TipoProyecto" FromRole="Proyecto" ToRole="TipoProyecto" />
+          <Property Name="Estado" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Proyecto_Persona">
-          <End Role="Persona" Type="Self.Persona" Multiplicity="0..1" />
-          <End Role="Proyecto" Type="Self.Proyecto" Multiplicity="*" />
+          <End Type="TestModel.Persona" Role="Persona" Multiplicity="0..1" />
+          <End Type="TestModel.Proyecto" Role="Proyecto" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Persona">
               <PropertyRef Name="Id" />
@@ -101,14 +146,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="TestEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Persona" EntityType="Self.Persona" />
-          <EntitySet Name="Proyecto" EntityType="Self.Proyecto" />
-          <AssociationSet Name="FK_Proyecto_Persona" Association="Self.FK_Proyecto_Persona">
-            <End Role="Persona" EntitySet="Persona" />
-            <End Role="Proyecto" EntitySet="Proyecto" />
-          </AssociationSet>
-        </EntityContainer>
+        <EntityType Name="TipoProyecto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Proyecto" Relationship="TestModel.FK_Proyecto_TipoProyecto" FromRole="TipoProyecto" ToRole="Proyecto" />
+        </EntityType>
+        <Association Name="FK_Proyecto_TipoProyecto">
+          <End Type="TestModel.TipoProyecto" Role="TipoProyecto" Multiplicity="0..1" />
+          <End Type="TestModel.Proyecto" Role="Proyecto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProyecto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Proyecto">
+              <PropertyRef Name="IdTipoProyecto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -118,31 +176,43 @@
           <EntitySetMapping Name="Persona">
             <EntityTypeMapping TypeName="TestModel.Persona">
               <MappingFragment StoreEntitySet="Persona">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CUIT" ColumnName="CUIT" />
-                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
-                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
-                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
-                <ScalarProperty Name="PartidoDepartamento" ColumnName="PartidoDepartamento" />
-                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
-                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Profesion" ColumnName="Profesion" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Telefono" ColumnName="Telefono" />
+                <ScalarProperty Name="Localidad" ColumnName="Localidad" />
+                <ScalarProperty Name="PartidoDepartamento" ColumnName="PartidoDepartamento" />
+                <ScalarProperty Name="Provincia" ColumnName="Provincia" />
+                <ScalarProperty Name="CodigoPostal" ColumnName="CodigoPostal" />
+                <ScalarProperty Name="RazonSocial" ColumnName="RazonSocial" />
+                <ScalarProperty Name="CUIT" ColumnName="CUIT" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Proyecto">
             <EntityTypeMapping TypeName="TestModel.Proyecto">
               <MappingFragment StoreEntitySet="Proyecto">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="NroProyecto" ColumnName="NroProyecto" />
-                <ScalarProperty Name="TituloProyecto" ColumnName="TituloProyecto" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
                 <ScalarProperty Name="TipoProyecto" ColumnName="TipoProyecto" />
-                <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
-                <ScalarProperty Name="Producto" ColumnName="Producto" />
-                <ScalarProperty Name="Resumen" ColumnName="Resumen" />
-                <ScalarProperty Name="Actividades" ColumnName="Actividades" />
-                <ScalarProperty Name="LinkYoutube" ColumnName="LinkYoutube" />
                 <ScalarProperty Name="IdPersona" ColumnName="IdPersona" />
+                <ScalarProperty Name="LinkYoutube" ColumnName="LinkYoutube" />
+                <ScalarProperty Name="Actividades" ColumnName="Actividades" />
+                <ScalarProperty Name="Resumen" ColumnName="Resumen" />
+                <ScalarProperty Name="Producto" ColumnName="Producto" />
+                <ScalarProperty Name="Diagnostico" ColumnName="Diagnostico" />
+                <ScalarProperty Name="IdTipoProyecto" ColumnName="IdTipoProyecto" />
+                <ScalarProperty Name="TituloProyecto" ColumnName="TituloProyecto" />
+                <ScalarProperty Name="NroProyecto" ColumnName="NroProyecto" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoProyecto">
+            <EntityTypeMapping TypeName="TestModel.TipoProyecto">
+              <MappingFragment StoreEntitySet="TipoProyecto">
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

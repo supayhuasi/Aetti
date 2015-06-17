@@ -4,6 +4,7 @@
     ViewBag.Title = "Busqueda";
 }
 
+<br>
 <h2>Busqueda de proyectos</h2>
 
 @*<p>
@@ -31,7 +32,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Busqueda" class="btn btn-default" />
+            <input type="submit" value="Busqueda" class="btn btn-primary" />
         </div>
     </div>
 }
@@ -41,5 +42,16 @@
 </div>*@
 
 @section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+
+@Scripts.Render("~/bundles/jqueryval")
 }
+
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+<script type="text/javascript" charset="utf-8">
+    $(document).ready(function () {
+        @if (ViewBag.Message != null)
+        {
+            <Text>alert('@ViewBag.Message');</text>
+        }
+    });
+</script>

@@ -44,7 +44,7 @@ namespace AETTI.Controllers
         // GET: Proyectoes/Create
         public ActionResult Create(int? Id)
         {
-            //ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion");
+            ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion");
             //ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial",Id);
             var proyecto = new Proyecto();
             proyecto.IdPersona = Id;
@@ -58,20 +58,23 @@ namespace AETTI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Proyecto proyecto)
         {
+            
             if (ModelState.IsValid)
             {
-                try { 
-                db.Proyecto.Add(proyecto);
-                db.SaveChanges();
-                return RedirectToAction("Index","Home");
-                    }
+                try 
+                { 
+                    db.Proyecto.Add(proyecto);
+                    db.SaveChanges();
+
+                    return RedirectToAction("Confirmacion", "Home", new { idPersona = proyecto.IdPersona, nroProyecto = proyecto.Id });
+                }
                 catch(Exception ex)
                 {
                     
                 }
             }
 
-            //ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
+            ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
             ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial", proyecto.IdPersona);
             return View(proyecto);
         }
