@@ -54,6 +54,7 @@ namespace AETTI.Models
         [DisplayName("E-mail")]
         [StringLength(100)]
         [Required(ErrorMessage = "Este campo es obligatorio.")]
+        [EmailAddress(ErrorMessage="Ingrese un mail valido.")]
         public string Email { get; set; }
     }
 }
