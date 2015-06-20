@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AETTI.Models;
+using AETTI.Util;
 
 namespace AETTI.Controllers
 {
@@ -48,6 +49,12 @@ namespace AETTI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,CUIT,RazonSocial,CodigoPostal,Profesion,Provincia,PartidoDepartamento,Localidad,Telefono,Email")] Persona persona)
         {
+
+            if (!Validations.ValidarCUIT(persona.CUIT))
+            {
+                ModelState.AddModelError("CUIT", "Ingrese un CUIT valido.");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Persona.Add(persona);

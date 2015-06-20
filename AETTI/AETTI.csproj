@@ -166,7 +166,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PersonasController.cs" />
     <Compile Include="Controllers\ProyectoesController.cs" />
-    <Compile Include="SenderMail.cs" />
+    <Compile Include="Util\SenderMail.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -201,6 +201,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Util\Validations.cs" />
     <Compile Include="ViewModels\BusquedaViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

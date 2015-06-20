@@ -19,6 +19,7 @@ namespace AETTI.Models
         [DisplayName("C.U.I.T")]
         [StringLength(50)]
         [Required(ErrorMessage = "Este campo es obligatorio.")]
+        [Range(0, 99999999999, ErrorMessage = "Ingrese un CUIT valido.")]
         public string CUIT { get; set; }
         
         [DisplayName("Titular")]
@@ -28,7 +29,7 @@ namespace AETTI.Models
         
         [DisplayName("Código Postal")]
         [StringLength(50)]
-        [Required(ErrorMessage = "Este campo es obligatorio.")]
+        [Range(100, 9999, ErrorMessage = "Ingrese un Codigo de Area valido.")]
         public string CodigoPostal { get; set; }
 
         [DisplayName("Provincia")]
@@ -49,6 +50,7 @@ namespace AETTI.Models
         [DisplayName("Teléfonos (incluir el código de área")]
         [StringLength(50)]
         [Required(ErrorMessage = "Este campo es obligatorio.")]
+        [RegularExpression(@"^\+?\d{1,3}?[- .]?\(?(?:\d{2,3})\)?[- .]?\d\d\d[- .]?\d\d\d\d$", ErrorMessage="Ingrese un telefono valido. Sin espacio y sin guión entre area y nro de telefono.")]
         public string Telefono { get; set; }
 
         [DisplayName("E-mail")]

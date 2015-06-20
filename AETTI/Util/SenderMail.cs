@@ -7,7 +7,7 @@ using System.Web;
 using System.Text;
 
 
-namespace AETTI
+namespace AETTI.Util
 {
     public class SenderMail
     {
