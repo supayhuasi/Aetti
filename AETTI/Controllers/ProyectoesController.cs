@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AETTI.Models;
+using System.Configuration;
+using AETTI.Util;
 
 
 namespace AETTI.Controllers
@@ -59,25 +61,40 @@ namespace AETTI.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Proyecto proyecto)
         {
-            
+
             if (ModelState.IsValid)
             {
-                try 
-                { 
+                try
+                {
                     db.Proyecto.Add(proyecto);
                     db.SaveChanges();
 
-                    return RedirectToAction("Confirmacion", "Home", new { idPersona = proyecto.IdPersona, nroProyecto = proyecto.Id });
+                    Persona persona = db.Persona.Find(proyecto.IdPersona);
+
+                    string textConfirmation = String.Format("Estimado/a {0}, su proyecto \"{1}\" se creo con éxito con el Numero {2}.", persona.RazonSocial, proyecto.TituloProyecto, proyecto.Id.ToString());
+
+                    SendMails(persona, textConfirmation);
+
+                    return RedirectToAction("Confirmacion", "Home", new { textConfirmation = textConfirmation });
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    
+
                 }
             }
 
             ViewBag.IdTipoProyecto = new SelectList(db.TipoProyecto, "Id", "Descripcion", proyecto.IdTipoProyecto);
             ViewBag.IdPersona = new SelectList(db.Persona, "Id", "RazonSocial", proyecto.IdPersona);
             return View(proyecto);
+        }
+
+        private static void SendMails(Persona persona, string textConfirmation)
+        {
+            string to = persona.Email;
+            string cco = ConfigurationManager.AppSettings["MailsOcultos"].ToString();
+            string subject = "Creacion de Proyecto AETTI";
+            string body = textConfirmation + "\r\rSaludos.\rAETTI";
+            new SenderMail().Send(to, cco, subject, body);
         }
 
         // GET: Proyectoes/Edit/5

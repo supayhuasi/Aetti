@@ -24,7 +24,7 @@ namespace AETTI.Util
             _mailPassword = ConfigurationManager.AppSettings["MailPassword"].ToString();
         }
 
-        public Boolean Send(string to, string subject, string body)
+        public Boolean Send(string to, string cco, string subject, string body)
         {
             try
             {
@@ -32,6 +32,7 @@ namespace AETTI.Util
 
                 Mail.From = new MailAddress(_mailFrom);
                 Mail.To.Add(to);
+                if(!string.IsNullOrEmpty(cco)) Mail.Bcc.Add(cco);
                 Mail.Subject = subject;
                 Mail.Body = body;
 
